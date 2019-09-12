@@ -39,7 +39,7 @@ fly.src = "sounds/flight.wav";
 scor.src = "sounds/score.mp3"
 st.src = "sounds/stargliderst.mp3"
 
-// on key down
+// on key down player moves up
 
 document.addEventListener("keydown",moveUp);
 
@@ -50,7 +50,7 @@ function moveUp(keycode){
 
 
 
-// pipe coordinates
+// obstacle coordinates
 
 var pipe = [];
 
@@ -90,7 +90,8 @@ function draw(){
             location.reload(); // reload the page
            
         }
-        
+ 
+    //add to score
         if(pipe[i].x == 5){
             score++;
             
