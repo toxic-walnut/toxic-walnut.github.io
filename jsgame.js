@@ -1,41 +1,20 @@
-//select the canvas
-/*var cvs = document.getElementById("canvas");
 
-//get access to drawing on canvas
-var ctx = cvs.getContext('2d');
-
-//load images
-
-var bird = new Image();
-var bg = new Image();
-
-bird.src = "image/bird.png";
-bg.src = "image/bg.png";
-
-
-
-
-function draw(){
-    ctx.drawImage(bg,0,0);
-}
-
-draw();*/
 var cvs = document.getElementById("canvas");
 var ctx = cvs.getContext("2d");
 
 // load images
 
-var bird = new Image();
+var ship = new Image();
 var bg = new Image();
 var fg = new Image();
-var pipeNorth = new Image();
-var pipeSouth = new Image();
+var stagNorth = new Image();
+var stagSouth = new Image();
 
-bird.src = "image/bird.png";
-bg.src = "image/bg.png";
-fg.src = "image/fg.png";
-pipeNorth.src = "image/pipeNorth.png";
-pipeSouth.src = "image/pipeSouth.png";
+ship.src = "image/ship.png";
+bg.src = "image/spacebg.png";
+fg.src = "image/spacefg.png";
+stagNorth.src = "image/stagnorth.png";
+stagSouth.src = "image/stagsouth.png";
 
 
 // some variables
@@ -46,7 +25,7 @@ var constant;
 var bX = 10;
 var bY = 150;
 
-var gravity = 1.5;
+var gravity = .8;
 
 var score = 0;
 
@@ -54,18 +33,22 @@ var score = 0;
 
 var fly = new Audio();
 var scor = new Audio();
+var st = new Audio();
 
-fly.src = "sounds/fly.mp3";
-scor.src = "sounds/score.mp3";
+fly.src = "sounds/flight.wav";
+scor.src = "sounds/score.mp3"
+st.src = "sounds/stargliderst.mp3"
 
 // on key down
 
 document.addEventListener("keydown",moveUp);
 
-function moveUp(){
-    bY -= 25;
+function moveUp(keycode){
+    bY -= 20;
     fly.play();
 }
+
+
 
 // pipe coordinates
 
@@ -76,37 +59,42 @@ pipe[0] = {
     y : 0
 };
 
+
 // draw images
 
 function draw(){
-    
+    st.play();
+        
     ctx.drawImage(bg,0,0);
     
     
     for(var i = 0; i < pipe.length; i++){
         
-        constant = pipeNorth.height+gap;
-        ctx.drawImage(pipeNorth,pipe[i].x,pipe[i].y);
-        ctx.drawImage(pipeSouth,pipe[i].x,pipe[i].y+constant);
+        constant = stagNorth.height+gap;
+        ctx.drawImage(stagNorth,pipe[i].x,pipe[i].y);
+        ctx.drawImage(stagSouth,pipe[i].x,pipe[i].y+constant);
              
         pipe[i].x--;
         
         if( pipe[i].x == 125 ){
             pipe.push({
                 x : cvs.width,
-                y : Math.floor(Math.random()*pipeNorth.height)-pipeNorth.height
+                y : Math.floor(Math.random()*stagNorth.height)-stagNorth.height
             }); 
         }
 
         // detect collision
         
-        if( bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY+bird.height >= pipe[i].y+constant) || bY + bird.height >=  cvs.height - fg.height){
+        if( bX + ship.width >= pipe[i].x && bX <= pipe[i].x + stagNorth.width && (bY <= pipe[i].y + stagNorth.height || bY+ship.height >= pipe[i].y+constant) || bY + ship.height >=  cvs.height - fg.height){
+            
             location.reload(); // reload the page
+           
         }
         
         if(pipe[i].x == 5){
             score++;
-            scor.play();
+            
+             scor.play();
         }
         
         
@@ -114,11 +102,11 @@ function draw(){
 
     ctx.drawImage(fg,0,cvs.height - fg.height);
     
-    ctx.drawImage(bird,bX,bY);
+    ctx.drawImage(ship,bX,bY);
     
     bY += gravity;
     
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = "#ffffff";
     ctx.font = "20px Verdana";
     ctx.fillText("Score : "+score,10,cvs.height-20);
     
