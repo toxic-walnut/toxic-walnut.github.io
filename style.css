@@ -1,0 +1,85 @@
+    @font-face {
+                    font-family: alegreyaSans;
+                    src: url(fonts/AlegreyaSans.ttf);
+        }
+    
+
+ body {
+            /*margin-left: 50%;*/
+          
+            text-align: center;
+            font-size: 200%;
+            background-color:#000000;
+            color: #ffffff; 
+            font-family: "alegreyaSans", serif;
+            border-style: solid;
+            border-color: #ffffff;
+            border-width: 20px;
+        }
+
+.lgo{
+            cursor: url('image/poke.png'), auto;
+            
+        }
+.lgoo{
+            cursor: url('image/weedle.png'), auto;
+            
+        }
+
+.bkgrnd {   
+            background-image: url(image/spaceBkgrnd.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+        }
+
+.bkgrndTwo {
+            background-image: url(image/birds.png);
+            background-repeat: no-repeat;
+            background-size: 40%;
+            background-position: center;
+    }
+
+.imgSize{
+            width: 45%;
+            height: 45%;
+    }
+
+
+      [class*="col-"] {
+            float: left;
+           
+            overflow: hidden;
+        }
+
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        .row::after {
+          content: ""; /* there will be no content after each row - try deleting this property or inserting some text to see what happens*/ 
+          clear: both; /* BOTH sides of the element will be CLEAR - nothing can appear there*/
+          display: table;/*makes the elements appear as a grid - ie the squares in a horizontal row will remain the same height*/
+        }
+
+
+        @media only screen and (max-width: 1080px) {
+          /* For mobile phones: */
+              [class*="col-"] {
+                width: 100%;
+              }
+            .dropdown {
+            position:static;
+            display: block;
+            }
+            
+        }
